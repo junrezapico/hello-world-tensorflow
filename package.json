@@ -5,10 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@tensorflow/tfjs": "^1.7.4",
-    "@tensorflow/tfjs-converter": "^1.7.4",
-    "@tensorflow/tfjs-core": "^1.7.4",
-    "@tensorflow/tfjs-node": "^1.7.4",
+    "@tensorflow/tfjs": "^4.0.0",
     "react": "16.5.2",
     "react-dom": "16.5.2",
     "react-magic-dropzone": "1.0.1",
@@ -19,7 +16,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve-ts": "http-server -c1 --cors ."
   },
   "browserslist": [
     ">0.2%",

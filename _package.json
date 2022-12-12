@@ -5,14 +5,11 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@tensorflow/tfjs": "4.1.0",
-    "@tensorflow/tfjs-converter": "^4.1.0",
-    "@tensorflow/tfjs-core": "^4.1.0",
-    "@tensorflow/tfjs-node": "^4.1.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "@tensorflow/tfjs": "^4.0.0",
+    "react": "16.5.2",
+    "react-dom": "16.5.2",
     "react-magic-dropzone": "1.0.1",
-    "react-scripts": "5.0.1"
+    "react-scripts": "2.0.3"
   },
   "devDependencies": {},
   "scripts": {
