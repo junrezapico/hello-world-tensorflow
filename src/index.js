@@ -251,8 +251,8 @@ class App extends React.Component {
     //  * this should work
 
     detections.forEach((item) => {
-      // const x = item["bbox"][0];
-      const x = item["bbox"][0] / 2;
+      const x = item["bbox"][0];
+      // const x = item["bbox"][0] / 2;
       const y = item["bbox"][1];
       const width = item["bbox"][2];
       const height = item["bbox"][3];
@@ -305,7 +305,8 @@ class App extends React.Component {
         <video
           // style={{ height: "600px", width: "500px" }}
           // style={{ height: "1200px", width: "1000px" }}
-          style={{ height: "100vh", width: "100vw" }}
+          // style={{ height: "100vh", width: "100vw" }}
+          style={{ height: window.innerHeight, width: window.innerWidth }}
           className="size"
           autoPlay
           playsInline
@@ -315,8 +316,10 @@ class App extends React.Component {
           // height="500"
           // width="1200"
           // height="1000"
-          width="100vw"
-          height="100vh"
+          // width="100vw"
+          // height="100vh"
+          height={window.innerHeight}
+          width={window.innerWidth}
           id="frame"
         />
         <canvas
