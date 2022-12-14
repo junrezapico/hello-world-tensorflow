@@ -317,6 +317,30 @@ class App extends React.Component {
     //  */
   };
 
+  takePhoto = () => {
+    const ctx = this.canvasRef.current.getContext("2d");
+    const video = this.videoRef.current;
+    const video_frame = document.getElementById("frame");
+    const height = video_frame.offsetHeight;
+    const width = video_frame.offsetWidth;
+    // if (width && height) {
+    // ctx.width = width;
+    // ctx.height = height;
+    ctx.drawImage(video, 0, 0, width, height);
+
+    const link = document.createElement("a");
+    link.download = "filename.png";
+    link.href = document.getElementById("canvas-id").toDataURL();
+    link.click();
+
+    // const data = ctx.toDataURL("image/png");
+    // photo.setAttribute("src", data);
+    // console.log("ayaya", data);
+    // } else {
+    //   clearphoto();
+    // }
+  };
+
   render() {
     return (
       <div>
@@ -346,6 +370,7 @@ class App extends React.Component {
         />
         <canvas
           className="size"
+          id="canvas-id"
           ref={this.canvasRef}
           // width="600"
           // height="500"
@@ -422,9 +447,9 @@ class App extends React.Component {
                   <div
                     style={{
                       flex: 1,
-                      borderRight: "solid silver 0.5px",
+                      borderRight: "solid #FFFFFF66 0.7px",
                       borderBottom:
-                        rowIndex === 2 ? "none" : "solid silver 0.5px",
+                        rowIndex === 2 ? "none" : "solid #FFFFFF66 0.7px",
                     }}
                   ></div>
                 ))}
@@ -447,7 +472,13 @@ class App extends React.Component {
             }}
           >
             <div>gallery</div>
-            <div>take photo</div>
+            <div
+              onClick={() => {
+                this.takePhoto();
+              }}
+            >
+              take photo
+            </div>
             <div>take video</div>
           </div>
         </div>
