@@ -52,10 +52,10 @@ let classesDir = {
   },
 };
 
-const videoConstraints = {
-  width: "100vw",
-  height: "100vh",
-};
+// const videoConstraints = {
+//   width: "100vw",
+//   height: "100vh",
+// };
 
 class App extends React.Component {
   videoRef = React.createRef();
