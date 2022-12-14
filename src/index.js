@@ -1,8 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import * as tf from "@tensorflow/tfjs";
 // import { loadGraphModel, load } from "@tensorflow/tfjs-converter";
 import "./styles.css";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 tf.setBackend("webgl");
 
 // const threshold = 0.35;
@@ -57,9 +61,25 @@ const videoConstraints = {
   height: "100vh",
 };
 
+const ReusableModal = ({ show, handleClose }) => {
+  return (
+    <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+      </Modal>
+    </>
+  );
+};
+
 class App extends React.Component {
   videoRef = React.createRef();
   canvasRef = React.createRef();
+  state = {
+    isModalOpen: false,
+  };
 
   componentDidMount() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -142,11 +162,11 @@ class App extends React.Component {
       // const score = _score[1];
       // const score = _score[0];
       // muwork sa akoa
-      const score = (_score[1]);
+      const score = _score[1];
       // const score = (_score[0]+_score[1])/2;
-      console.log("hohoy", scores, score, _score, threshold, boxes);
+      // console.log("hohoy", scores, score, _score, threshold, boxes);
       if (score > threshold) {
-        console.log("hohoy pasok", score, _score);
+        // console.log("hohoy pasok", score, _score);
         const bbox = [];
         // // muwork sa akng mitch
         // const minY = boxes[0][i][0] * video_frame.offsetHeight;
@@ -300,13 +320,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Real-Time Object Detection: Kangaroo</h1>
-        <h3>MobileNetV2</h3>
         <video
           // style={{ height: "600px", width: "500px" }}
           // style={{ height: "1200px", width: "1000px" }}
           // style={{ height: "100vh", width: "100vw" }}
-          style={{ height: window.innerHeight, width: window.innerWidth }}
+          style={{
+            height: window.innerHeight,
+            width: window.innerWidth,
+            backgroundColor: "black",
+          }}
           className="size"
           autoPlay
           playsInline
@@ -361,6 +383,74 @@ class App extends React.Component {
             gltf-model="http://localhost:3000/whale/whale-2nd-animation.glb"
           ></a-entity>
         </a-scene>
+        <ReusableModal
+          show={this.state.isModalOpen}
+          handleClose={(ev) => {
+            this.setState({ isModalOpen: false });
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            width: "100vw",
+            height: "100vw",
+            // background: "#33669932",
+          }}
+          onClick={() => {
+            if (!this.state.isModalOpen) {
+              this.setState({ isModalOpen: true });
+            }
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              width: "100vw",
+              background: "transparent",
+              color: "white",
+              height: "80vh",
+              left: 0,
+              top: 0,
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {[0, 1, 2].map((row, rowIndex) => (
+              <div style={{ flex: 1, display: "flex" }}>
+                {[0, 1, 2].map(() => (
+                  <div
+                    style={{
+                      flex: 1,
+                      borderRight: "solid silver 0.5px",
+                      borderBottom:
+                        rowIndex === 2 ? "none" : "solid silver 0.5px",
+                    }}
+                  ></div>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              width: "100vw",
+              background: "black",
+              color: "white",
+              height: "20vh",
+              left: 0,
+              top: "80vh",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div>gallery</div>
+            <div>take photo</div>
+            <div>take video</div>
+          </div>
+        </div>
       </div>
     );
   }
